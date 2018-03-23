@@ -1,6 +1,7 @@
 package tables;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,10 @@ public class MyTables {
 		
 		driver = new FirefoxDriver();
 		driver.get("https://money.rediff.com/mutual-funds/liquid");
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 	}
 	
@@ -64,8 +69,6 @@ public class MyTables {
 			}
 		}
 		
-		/*WebDriverWait wait = new WebDriverWait(driver, 20);
-		WebElement element = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator);*/
 		
 		String cellValue = driver.findElement(By.xpath("//table[@class='dataTable']//thead/tr/th["+columnIndex+"]/../../following-sibling::tbody/tr[7]/td["+columnIndex+"]")).getText();
 		System.out.println("Value = "+cellValue);
